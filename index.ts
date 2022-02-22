@@ -1,2 +1,2 @@
-const mesg = 'Hello con-166';
-console.log(mesg);
+const megs = 'Hello con-166';
+console.log(megs);
