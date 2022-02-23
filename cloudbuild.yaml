@@ -1,4 +1,4 @@
-# git stuff
+steps:
   - name: 'gcr.io/cloud-builders/git'
     args: ['add', '-A']
   - name: 'gcr.io/cloud-builders/git'
