@@ -1,5 +1,9 @@
 steps:
   - name: 'gcr.io/cloud-builders/git'
+    args: ['config --global user.name', 'Shubham-IX']
+  - name: 'gcr.io/cloud-builders/git'
+    args: ['config --global user.email', 'shubhamh@incubxperts.com']
+  - name: 'gcr.io/cloud-builders/git'
     args: ['add', '-A']
   - name: 'gcr.io/cloud-builders/git'
     args: ['commit', '-m', '"some message"']
