@@ -41,9 +41,10 @@ steps:
     echo 'npm start'
     latest = $(/workspace/Latest_Version.txt)
     previous = $(/workspace/Previous_Version.txt)
-    echo $latest and $previous
-#     while read -r $file1; do
-#     while read  -r $file2 ;do
+    read -r $latest;
+    echo $latest
+    read  -r $previous ;
+    echo $latest
 #     if [[$(cat /workspace/Latest_Version.txt) == $(cat /workspace/Previous_Version.txt)]]
 #     then
 #     echo 'same package version' 
