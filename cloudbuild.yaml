@@ -1,9 +1,35 @@
 steps:
-  - name: 'gcr.io/cloud-builders/git'
-    args: ['git config --global user.name', 'Shubham-IX']
-  - name: 'gcr.io/cloud-builders/git'
-    args: ['git config --global user.email', 'shubhamh@incubxperts.com']
-  - name: 'gcr.io/cloud-builders/git'
-    args: ['add', '-A']
-  - name: 'gcr.io/cloud-builders/git'
-    args: ['commit', '-m', '"some message"']
+# git commands
+
+- name: 'gcr.io/cloud-builders/docker'
+   entrypoint: 'bash'
+   args:
+    - '-c'
+    - |
+    - git config --global user.name 'Shubham-IX'
+    - git config --global user.email 'shubhamh@incubxperts.com'
+    - echo $(cat package.json | grep version | head -1 | awk -F= "{ print $1 }" | sed 's/[version:,\",]//g' | tr -d '[[:space:]]') > /workspace/Latest_Version.txt
+    - git checkout master
+    - echo $(cat sdk/package.json | grep version | head -1 | awk -F= "{ print $1 }" | sed 's/[version:,\",]//g' | tr -d '[[:space:]]') > /workspace/Previous_Version.txt
+    - git checkout development
+    - echo 'Version is'
+    - echo $(cat /workspace/Latest_Version.txt)
+    - echo $(cat /workspace/Previous_Version.txt)
+
+- name : 'gcr.io/cloud-builders/npm'    
+  entrypoint: 'bash'
+  args:
+    - '-c'
+    - |
+    -  if [[ $(cat /workspace/Latest_Version.txt) == $(cat /workspace/Previous_Version.txt) ]]
+    then
+      cd GCP-Test
+      npm version patch
+      git add .
+      git commit -m "patch package version"
+      git push origin development
+    elseif [[ $(cat /workspace/Latest_Version.txt) != $(cat /workspace/Previous_Version.txt) ]]
+    then
+      echo 'version is updated by developer'
+    fi
+
