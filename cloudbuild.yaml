@@ -40,10 +40,14 @@ steps:
   - |
     echo 'npm start'
     while read -r $(cat /workspace/Latest_Version.txt); do 
-    echo 'Latest_Version'
-    done
     while read  -r $(cat /workspace/Previous_Version.txt) ;do
-    echo 'Previous_Version'
+    if [[$(cat /workspace/Latest_Version.txt) == $(cat /workspace/Previous_Version.txt)]]
+    then
+    echo 'same package version' 
+    else 
+    echo 'different package version or error'
+    fi
+    done
     done
    
 #     if [[$(cat /workspace/Latest_Version.txt) == $(cat /workspace/Previous_Version.txt)]]
