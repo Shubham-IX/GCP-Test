@@ -38,7 +38,7 @@ steps:
   args:
   - '-c'
   - |
-    if [$(cat /workspace/Latest_Version.txt) == '1.0.0']
+    if ['1.0.0' == '1.0.0']
     then
     echo 'in npm bash latest version' $(cat /workspace/Latest_Version.txt)
     echo 'in npm bash latest version' $(cat /workspace/Previous_Version.txt)
