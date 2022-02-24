@@ -39,12 +39,12 @@ steps:
   - '-c'
   - |
     echo 'npm start'
-    latest = $(cat /workspace/Latest_Version.txt)
-    previous = $(cat /workspace/Previous_Version.txt)
+    latest = "$(cat /workspace/Latest_Version.txt)"
+    previous = "$(cat /workspace/Previous_Version.txt)"
     read -r $latest;
-    echo $latest
+    echo "$latest"
     read  -r $previous ;
-    echo $latest
+    echo "$latest"
 #     if [[$(cat /workspace/Latest_Version.txt) == $(cat /workspace/Previous_Version.txt)]]
 #     then
 #     echo 'same package version' 
