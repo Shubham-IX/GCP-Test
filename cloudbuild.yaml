@@ -7,26 +7,26 @@ steps:
   - |
     echo "Pushing changes to git config repository"
     git show-ref
-    git config --global user.name 'Shubham-IX'
-    git config --global user.email 'shubhamh@incubxperts.com'
+    git config --global user.name ${_GIT_USERNAME}
+    git config --global user.email ${_GIT_USEREMAIL}
     
     echo $(cat package.json | grep version | head -1 | awk -F= "{ print $1 }" | sed 's/[version:,\",]//g' | tr -d '[[:space:]]') > /workspace/Latest_Version.txt
 
-    git branch -M master
-    git remote set-url origin https://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@github.com/Shubham-IX/GCP-Test.git
-    git checkout master
-    git fetch origin master
-    git reset --hard origin/master
+    git branch -M ${_MAIN_BRANCH}
+    git remote set-url origin ${_GIT_REPO}
+    git checkout ${_MAIN_BRANCH}
+    git fetch origin ${_MAIN_BRANCH}
+    git reset --hard origin/${_MAIN_BRANCH}
 
     echo $(cat package.json | grep version | head -1 | awk -F= "{ print $1 }" | sed 's/[version:,\",]//g' | tr -d '[[:space:]]') > /workspace/Previous_Version.txt
 
-    git branch -M development
-    git remote set-url origin https://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@github.com/Shubham-IX/GCP-Test.git
-    git checkout development
-    git fetch origin development
-    git reset --hard origin/development
+    git branch -M $BRANCH_NAME
+    git remote set-url origin ${_GIT_REPO}
+    git checkout $BRANCH_NAME
+    git fetch origin $BRANCH_NAME
+    git reset --hard origin/$BRANCH_NAME
     git tag v$(cat /workspace/Latest_Version.txt)
-    git push origin development --tags -f
+    git push origin $BRANCH_NAME --tags -f
 
     echo 'Current Version is: ' $(cat /workspace/Latest_Version.txt)
     echo 'Previous Version is: ' $(cat /workspace/Previous_Version.txt)
@@ -43,7 +43,7 @@ steps:
     npm version patch
     git add .
     git commit -m "patch package version is same"
-    git push origin development
+    git push origin $BRANCH_NAME
     elif [[ $(cat /workspace/Latest_Version.txt) != $(cat /workspace/Previous_Version.txt) ]]
     then
     echo 'different package version'
