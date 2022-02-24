@@ -33,14 +33,16 @@ steps:
     echo 'Current Version is: ' $(cat /workspace/Latest_Version.txt)
     echo 'Previous Version is: ' $(cat /workspace/Previous_Version.txt)
 
-- name: 'gcr.io/cloud-builders/npm'
+- name: gcr.io/cloud-builders/npm
   entrypoint: 'bash'
   args:
   - '-c'
   - |
     if [[ $(cat /workspace/Latest_Version.txt) == $(cat /workspace/Previous_Version.txt) ]]
+    then
     echo 'same package version'
     elseif [[ $(cat /workspace/Latest_Version.txt) != $(cat /workspace/Previous_Version.txt) ]]
+    then
     echo 'different package version'
 #       npm version patch
 #       git add .
