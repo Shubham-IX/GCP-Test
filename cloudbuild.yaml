@@ -33,9 +33,14 @@ steps:
     echo 'Current Version is: ' $(cat /workspace/Latest_Version.txt)
     echo 'Previous Version is: ' $(cat /workspace/Previous_Version.txt)
     
+- name: gcr.io/cloud-builders/git
+  entrypoint: 'bash'
+  args:
+  - '-c'
+  - |
     echo development
     git branch -M development
-    git remote set-url origin https://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@github.com/Shubham-IX/GCP-Test.git
+    git remote set-url origin  https://github.com/Shubham-IX/GCP-Test.git
     git tag v$(cat /workspace/Latest_Version.txt)
     git push origin development --tags -f
 
