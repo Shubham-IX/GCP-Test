@@ -53,6 +53,9 @@ steps:
   - '-c'
   - |
     echo development
+    git show-ref
+    git config --global user.name 'Shubham-IX'
+    git config --global user.email 'shubhamh@incubxperts.com'
     git branch -M development
     git remote set-url origin  https://github.com/Shubham-IX/GCP-Test.git
     git tag v$(cat /workspace/Latest_Version.txt)
