@@ -38,16 +38,14 @@ steps:
   args:
   - '-c'
   - |
+    echo 'npm start'
     if [[$(cat /workspace/Latest_Version.txt) == $(cat /workspace/Previous_Version.txt)]]
     then
-    echo 'same package version'
-    
+    echo 'same package version' 
     elseif [[ $(cat /workspace/Latest_Version.txt) != $(cat /workspace/Previous_Version.txt) ]]
-     echo 'Package version is not same'
-     
-     else
-     echo 'error'
-     
+    echo 'Package version is not same'
+    else
+    echo 'error' 
     fi
 #     if [[ $(cat /workspace/Latest_Version.txt) == $(cat /workspace/Previous_Version.txt) ]]
 #     echo 'same package version'
