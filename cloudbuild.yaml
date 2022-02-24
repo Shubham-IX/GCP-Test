@@ -10,8 +10,6 @@ steps:
     git config --global user.name 'Shubham-IX'
     git config --global user.email 'shubhamh@incubxperts.com'
     
-    echo 'test v'
-    echo $(cat package.json | head -1 | sed 's/[version:,\",]//g' | tr -d '[[:space:]]')
     echo $(cat package.json | grep version | head -1 | awk -F= "{ print $1 }" | sed 's/[version:,\",]//g' | tr -d '[[:space:]]') > /workspace/Latest_Version.txt
 
     git branch -M master
@@ -35,15 +33,15 @@ steps:
     echo 'Current Version is: ' $(cat /workspace/Latest_Version.txt)
     echo 'Previous Version is: ' $(cat /workspace/Previous_Version.txt)
 
-# - name: gcr.io/cloud-builders/npm
-#   entrypoint: 'bash'
-#   args:
-#   - '-c'
-#   - |
-#       if [$(cat /workspace/Latest_Version.txt) == '1.0.0']
-#       then
-#       echo 'in npm bash latest version' $(cat /workspace/Latest_Version.txt)
-#       echo 'in npm bash latest version' $(cat /workspace/Previous_Version.txt)
+- name: gcr.io/cloud-builders/npm
+  entrypoint: 'bash'
+  args:
+  - '-c'
+  - |
+    if [$(cat /workspace/Latest_Version.txt) == '1.0.0']
+    then
+    echo 'in npm bash latest version' $(cat /workspace/Latest_Version.txt)
+    echo 'in npm bash latest version' $(cat /workspace/Previous_Version.txt)
 #     if [[ $(cat /workspace/Latest_Version.txt) == $(cat /workspace/Previous_Version.txt) ]]
 #     echo 'same package version'
 #     elseif [[ $(cat /workspace/Latest_Version.txt) != $(cat /workspace/Previous_Version.txt) ]]
@@ -55,6 +53,6 @@ steps:
 #     elseif [[ $(cat /workspace/Latest_Version.txt) != $(cat /workspace/Previous_Version.txt) ]]
 #     then
 #       echo 'Package version is not same'
-#     fi
+    fi
 
 
