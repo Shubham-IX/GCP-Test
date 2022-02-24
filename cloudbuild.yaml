@@ -13,8 +13,7 @@ steps:
     echo $(cat package.json | grep version | head -1 | awk -F= "{ print $1 }" | sed 's/[version:,\",]//g' | tr -d '[[:space:]]') > /workspace/Latest_Version.txt
 
     git branch -M master
-    git remote set-url origin  https://github.com/Shubham-IX/GCP-Test.git
-
+    git remote set-url origin https://Shubham-IX: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@github.com/Shubham-IX/GCP-Test.git
     git checkout master
     git fetch origin master
     git reset --hard origin/master
@@ -22,7 +21,7 @@ steps:
     echo $(cat package.json | grep version | head -1 | awk -F= "{ print $1 }" | sed 's/[version:,\",]//g' | tr -d '[[:space:]]') > /workspace/Previous_Version.txt
 
     git branch -M development
-    git remote set-url origin  https://github.com/Shubham-IX/GCP-Test.git
+    git remote set-url origin https://Shubham-IX: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@github.com/Shubham-IX/GCP-Test.git
     git checkout development
     git fetch origin development
     git reset --hard origin/development
