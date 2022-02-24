@@ -38,7 +38,8 @@ steps:
   args:
   - '-c'
   - |
-      echo 'in npm bash'
+      echo 'in npm bash latest version' $(cat /workspace/Latest_Version.txt)
+      echo 'in npm bash latest version' $(cat /workspace/Previous_Version.txt)
 #     if [[ $(cat /workspace/Latest_Version.txt) == $(cat /workspace/Previous_Version.txt) ]]
 #     echo 'same package version'
 #     elseif [[ $(cat /workspace/Latest_Version.txt) != $(cat /workspace/Previous_Version.txt) ]]
