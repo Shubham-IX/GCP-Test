@@ -9,7 +9,9 @@ steps:
     git show-ref
     git config --global user.name 'Shubham-IX'
     git config --global user.email 'shubhamh@incubxperts.com'
-    echo $(cat package.json | grep version | head -1 | awk -F= "{ print $1 }" | sed 's/[version:,\",]//g' | tr -d '[[:space:]]')
+    
+    echo 'test v'
+    echo $(cat package.json | grep version | head -1 | sed 's/[version:,\",]//g' | tr -d '[[:space:]]')
     echo $(cat package.json | grep version | head -1 | awk -F= "{ print $1 }" | sed 's/[version:,\",]//g' | tr -d '[[:space:]]') > /workspace/Latest_Version.txt
 
     git branch -M master
@@ -19,7 +21,7 @@ steps:
     git fetch origin master
     git reset --hard origin/master
 
-    echo $(cat package.json | grep version | head -1 | sed 's/[version:,\",]//g' | tr -d '[[:space:]]') > /workspace/Previous_Version.txt
+    echo $(cat package.json | grep version | head -1 | awk -F= "{ print $1 }" | sed 's/[version:,\",]//g' | tr -d '[[:space:]]') > /workspace/Previous_Version.txt
 
     git branch -M development
     git remote set-url origin  https://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@github.com/Shubham-IX/GCP-Test.git
