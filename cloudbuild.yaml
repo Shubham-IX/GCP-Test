@@ -29,7 +29,6 @@ steps:
     git tag v$(cat /workspace/Latest_Version.txt)
     git push origin development --tags -f
 
-    echo 'Version is'
     echo 'Current Version is: ' $(cat /workspace/Latest_Version.txt)
     echo 'Previous Version is: ' $(cat /workspace/Previous_Version.txt)
 
@@ -39,16 +38,15 @@ steps:
   - '-c'
   - |
     echo 'npm start'
-    if [[$(cat /workspace/Latest_Version.txt) == $(cat /workspace/Previous_Version.txt)]]
-    then
-    echo 'same package version'
-    npm version patch
-    git add .
-    git commit -m "patch package version"
-    git push origin $BRANCH_NAME
-    elseif [[$(cat /workspace/Latest_Version.txt) == $(cat /workspace/Previous_Version.txt)]]
-    echo 'different package version or error'
-    fi
+    cmp --silent (cat /workspace/Latest_Version.txt) $(cat /workspace/Previous_Version.txt) || echo "files are different"
+#     echo 'same package version'
+#     npm version patch
+#     git add .
+#     git commit -m "patch package version"
+#     git push origin $BRANCH_NAME
+#     elseif [[$(cat /workspace/Latest_Version.txt) == $(cat /workspace/Previous_Version.txt)]]
+#     echo 'different package version or error'
+#     fi
    
 #     if [[$(cat /workspace/Latest_Version.txt) == $(cat /workspace/Previous_Version.txt)]]
 #     then
