@@ -41,7 +41,11 @@ steps:
     echo 'npm start'
     if [[$(cat /workspace/Latest_Version.txt) == $(cat /workspace/Previous_Version.txt)]]
     then
-    echo 'same package version' 
+    echo 'same package version'
+    npm version patch
+    git add .
+    git commit -m "patch package version"
+    git push origin $BRANCH_NAME
     elseif [[$(cat /workspace/Latest_Version.txt) == $(cat /workspace/Previous_Version.txt)]]
     echo 'different package version or error'
     fi
