@@ -38,6 +38,8 @@ steps:
   args:
   - '-c'
   - |
+      if [[ $(cat /workspace/Latest_Version.txt) == $(cat /workspace/Previous_Version.txt) ]]
+      then
       echo 'in npm bash latest version' $(cat /workspace/Latest_Version.txt)
       echo 'in npm bash latest version' $(cat /workspace/Previous_Version.txt)
 #     if [[ $(cat /workspace/Latest_Version.txt) == $(cat /workspace/Previous_Version.txt) ]]
