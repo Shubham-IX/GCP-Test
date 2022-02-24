@@ -11,7 +11,7 @@ steps:
     git config --global user.email 'shubhamh@incubxperts.com'
     
     echo 'test v'
-    echo $(cat package.json | grep version | head -1 | sed 's/[version:,\",]//g' | tr -d '[[:space:]]')
+    echo $(cat package.json | grep version | sed 's/[version:,\",]//g' | tr -d '[[:space:]]')
     echo $(cat package.json | grep version | head -1 | awk -F= "{ print $1 }" | sed 's/[version:,\",]//g' | tr -d '[[:space:]]') > /workspace/Latest_Version.txt
 
     git branch -M master
