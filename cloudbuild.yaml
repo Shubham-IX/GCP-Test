@@ -31,6 +31,12 @@ steps:
     echo 'Current Version is: ' $(cat /workspace/Latest_Version.txt)
     echo 'Previous Version is: ' $(cat /workspace/Previous_Version.txt)
 
+    echo development
+    git branch -M development
+    git remote set-url origin  https://github.com/Shubham-IX/GCP-Test.git
+    git tag v$(cat /workspace/Latest_Version.txt)
+    git push origin development --tags -f
+
 # - name: 'gcr.io/cloud-builders/npm'
 #   entrypoint: 'bash'
 #   args:
@@ -47,17 +53,4 @@ steps:
 #       echo 'Package version is not same'
 #     fi
 
-- name: gcr.io/cloud-builders/git
-  entrypoint: 'bash'
-  args:
-  - '-c'
-  - |
-    echo development
-    git show-ref
-    git config --global user.name 'Shubham-IX'
-    git config --global user.email 'shubhamh@incubxperts.com'
-    git branch -M development
-    git remote set-url origin  https://github.com/Shubham-IX/GCP-Test.git
-    git tag v$(cat /workspace/Latest_Version.txt)
-    git push origin development --tags -f
 
