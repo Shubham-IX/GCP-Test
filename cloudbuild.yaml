@@ -42,6 +42,9 @@ steps:
     while read -r $(cat /workspace/Latest_Version.txt); do 
     while read  -r $(cat /workspace/Previous_Version.txt) ;do
     echo 'pass'
+    done
+    done
+   
 #     if [[$(cat /workspace/Latest_Version.txt) == $(cat /workspace/Previous_Version.txt)]]
 #     then
 #     echo 'same package version' 
