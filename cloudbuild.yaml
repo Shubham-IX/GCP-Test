@@ -44,7 +44,7 @@ steps:
     git config --global user.name 'Shubham-IX'
     git config --global user.email 'shubhamh@incubxperts.com'
 
-    echo $(cat sdk/package.json | grep version | head -1 | awk -F= "{ print $1 }" | sed 's/[version:,\",]//g' | tr -d '[[:space:]]') > /workspace/Latest_Version.txt
+    echo $(cat package.json | grep version | head -1 | awk -F= "{ print $1 }" | sed 's/[version:,\",]//g' | tr -d '[[:space:]]') > /workspace/Latest_Version.txt
 
     git branch -M master
     git remote set-url origin https://github.com/Shubham-IX/GCP-Test.git
@@ -53,7 +53,7 @@ steps:
     git fetch origin master
     git reset --hard origin/master
 
-    echo $(cat sdk/package.json | grep version | head -1 | awk -F= "{ print $1 }" | sed 's/[version:,\",]//g' | tr -d '[[:space:]]') > /workspace/Previous_Version.txt
+    echo $(cat package.json | grep version | head -1 | awk -F= "{ print $1 }" | sed 's/[version:,\",]//g' | tr -d '[[:space:]]') > /workspace/Previous_Version.txt
 
     git branch -M development
     git remote set-url origin https://github.com/Shubham-IX/GCP-Test.git
@@ -62,8 +62,8 @@ steps:
     git reset --hard origin/development
 
     echo 'Version is'
-    echo '$(cat /workspace/Latest_Version.txt)'
-    echo '$(cat /workspace/Previous_Version.txt)'
+    echo $(cat /workspace/Latest_Version.txt)
+    echo $(cat /workspace/Previous_Version.txt)
 
 # - name: 'gcr.io/cloud-builders/npm'
 #   entrypoint: 'bash'
