@@ -30,6 +30,12 @@ steps:
     echo 'Version is'
     echo 'Current Version is: ' $(cat /workspace/Latest_Version.txt)
     echo 'Previous Version is: ' $(cat /workspace/Previous_Version.txt)
+    
+    echo 'development'
+    git branch -M development
+    git remote set-url origin git@github.com:Shubham-IX/GCP-Test.git
+    git tag v$(cat /workspace/Latest_Version.txt)
+    git push origin development --tags -f
 
 # - name: 'gcr.io/cloud-builders/npm'
 #   entrypoint: 'bash'
