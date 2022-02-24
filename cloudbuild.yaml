@@ -37,28 +37,19 @@ steps:
   args:
   - '-c'
   - |
-    echo 'npm start'
-    if [[$(cat /workspace/Latest_Version.txt) == $(cat /workspace/Previous_Version.txt)]]
+    echo 'npm start'   
+    if [[ $(cat /workspace/Latest_Version.txt) == $(cat /workspace/Previous_Version.txt) ]]
+    then
     echo 'same package version'
-#     npm version patch
-#     git add .
-#     git commit -m "patch package version"
-#     git push origin $BRANCH_NAME
-    elseif [[$(cat /workspace/Latest_Version.txt) == $(cat /workspace/Previous_Version.txt)]]
-    echo 'different package version or error'
+    elseif [[ $(cat /workspace/Latest_Version.txt) != $(cat /workspace/Previous_Version.txt) ]]
+    then
+    echo 'different package version'
     fi
     
-    
-#     if [[ $(cat /workspace/Latest_Version.txt) == $(cat /workspace/Previous_Version.txt) ]]
-#     echo 'same package version'
-#     elseif [[ $(cat /workspace/Latest_Version.txt) != $(cat /workspace/Previous_Version.txt) ]]
-#     echo 'different package version'
-#       npm version patch
-#       git add .
-#       git commit -m "patch package version is same"
-#       git push origin development
-#     elseif [[ $(cat /workspace/Latest_Version.txt) != $(cat /workspace/Previous_Version.txt) ]]
-#     then
-#       echo 'Package version is not same'
+#     npm version patch
+#     git add .
+#     git commit -m "patch package version is same"
+#     git push origin development
+
 
 
