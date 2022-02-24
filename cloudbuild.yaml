@@ -62,8 +62,8 @@ steps:
     git reset --hard origin/development
 
     echo 'Version is'
-    echo $(cat /workspace/Latest_Version.txt)
-    echo $(cat /workspace/Previous_Version.txt)
+    echo '$(cat /workspace/Latest_Version.txt)'
+    echo '$(cat /workspace/Previous_Version.txt)'
 
 # - name: 'gcr.io/cloud-builders/npm'
 #   entrypoint: 'bash'
