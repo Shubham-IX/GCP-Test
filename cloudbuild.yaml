@@ -42,6 +42,8 @@ steps:
     if [[$(cat /workspace/Latest_Version.txt) == $(cat /workspace/Previous_Version.txt)]]
     then
     echo 'same package version' 
+    else 
+    echo 'different package version or error'
     fi
 #     if [[ $(cat /workspace/Latest_Version.txt) == $(cat /workspace/Previous_Version.txt) ]]
 #     echo 'same package version'
