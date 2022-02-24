@@ -39,8 +39,8 @@ steps:
   - '-c'
   - |
     echo 'npm start'
-    latest = "/workspace/Latest_Version.txt"
-    previous = "/workspace/Previous_Version.txt"
+    latest = $(/workspace/Latest_Version.txt)
+    previous = $(/workspace/Previous_Version.txt)
     echo $latest and $previous
 #     while read -r $file1; do
 #     while read  -r $file2 ;do
