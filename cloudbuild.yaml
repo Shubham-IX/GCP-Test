@@ -53,6 +53,7 @@ steps:
   - '-c'
   - |
     echo $BRANCH_NAME
+    echo git branch -M $BRANCH_NAME
 #     git branch -M $BRANCH_NAME
 #     echo ${_GIT_REPO}
 #     git remote set-url origin ${_GIT_REPO}
