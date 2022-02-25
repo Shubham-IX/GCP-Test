@@ -18,6 +18,7 @@ steps:
     echo $(cat package.json | grep version | head -1 | awk -F= "{ print $1 }" | sed 's/[version:,\",]//g' | tr -d '[[:space:]]') > /workspace/Previous_Version.txt
     echo 'Current Version is: ' $(cat /workspace/Latest_Version.txt)
     echo 'Previous Version is: ' $(cat /workspace/Previous_Version.txt)
+    
 - name: gcr.io/cloud-builders/npm
   entrypoint: 'bash'
   args:
@@ -26,6 +27,7 @@ steps:
     echo 'npm start'   
     if [[ $(cat /workspace/Latest_Version.txt) == $(cat /workspace/Previous_Version.txt) ]]
     then
+    npm install
     npm version patch
     git add .
     git commit -m "Package version is same in master and development"
