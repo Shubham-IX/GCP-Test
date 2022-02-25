@@ -56,7 +56,7 @@ steps:
     git branch -M $BRANCH_NAME
     echo ${_GIT_REPO}
     git remote set-url origin ${_GIT_REPO}
-    git tag updated version
+    git tag -a updated version
     git push origin $BRANCH_NAME
 
 
