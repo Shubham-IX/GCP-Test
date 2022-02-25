@@ -47,6 +47,13 @@ steps:
     echo 'different package version'
     fi
     
+- name: gcr.io/cloud-builders/git
+  entrypoint: 'bash'
+  args:
+  - '-c'
+  - |
+    echo $BRANCH_NAME
+    
 
 
 
