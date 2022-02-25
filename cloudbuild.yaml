@@ -1,23 +1,20 @@
 steps:
-- name: gcr.io/cloud-builders/git
+- name: gcr.io/cloud-builders/npm
   entrypoint: 'bash'
   args:
   - '-c'
   - |
     echo "Pushing changes to git config repository"
-    git show-ref
     git config --global user.name ${_GIT_USERNAME}
     git config --global user.email ${_GIT_USEREMAIL}
     
     echo $(cat package.json | grep version | head -1 | awk -F= "{ print $1 }" | sed 's/[version:,\",]//g' | tr -d '[[:space:]]') > /workspace/Latest_Version.txt
-    git branch -M ${_MAIN_BRANCH}
-    git remote set-url origin ${_GIT_REPO}
     git checkout ${_MAIN_BRANCH}
-    git fetch origin ${_MAIN_BRANCH}
-    git reset --hard origin/${_MAIN_BRANCH}
+    
     echo $(cat package.json | grep version | head -1 | awk -F= "{ print $1 }" | sed 's/[version:,\",]//g' | tr -d '[[:space:]]') > /workspace/Previous_Version.txt
     echo 'Current Version is: ' $(cat /workspace/Latest_Version.txt)
     echo 'Previous Version is: ' $(cat /workspace/Previous_Version.txt)
+   
     echo 'npm start'   
     if [[ $(cat /workspace/Latest_Version.txt) == $(cat /workspace/Previous_Version.txt) ]]
     then
