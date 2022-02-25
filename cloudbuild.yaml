@@ -28,7 +28,7 @@ steps:
     then
     npm version patch
     git add .
-    git commit -m "Package version is same"
+    git commit -m "Package version is same in master and development"
     git push origin ${_MAIN_BRANCH}
     echo 'same package version'
     elif [[ $(cat /workspace/Latest_Version.txt) != $(cat /workspace/Previous_Version.txt) ]]
