@@ -47,12 +47,12 @@ steps:
     echo 'different package version'
     fi
     
-# - name: gcr.io/cloud-builders/git
-#   entrypoint: 'bash'
-#   args:
-#   - '-c'
-#   - |
-#     echo $BRANCH_NAME
+- name: gcr.io/cloud-builders/git
+  entrypoint: 'bash'
+  args:
+  - '-c'
+  - |
+    echo $BRANCH_NAME
 #     git branch -M $BRANCH_NAME
 #     echo ${_GIT_REPO}
 #     git remote set-url origin ${_GIT_REPO}
