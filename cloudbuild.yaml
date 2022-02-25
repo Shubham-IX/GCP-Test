@@ -20,12 +20,6 @@ steps:
 
     echo $(cat package.json | grep version | head -1 | awk -F= "{ print $1 }" | sed 's/[version:,\",]//g' | tr -d '[[:space:]]') > /workspace/Previous_Version.txt
 
-    git branch -M $BRANCH_NAME
-    git remote set-url origin ${_GIT_REPO}
-    git checkout $BRANCH_NAME
-    git fetch origin $BRANCH_NAME
-    git reset --hard origin/$BRANCH_NAME
-
     echo 'Current Version is: ' $(cat /workspace/Latest_Version.txt)
     echo 'Previous Version is: ' $(cat /workspace/Previous_Version.txt)
 
