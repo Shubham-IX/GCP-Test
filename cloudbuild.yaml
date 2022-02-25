@@ -46,7 +46,7 @@ steps:
       echo 'version is not updated'
     fi
 
-    - name: gcr.io/cloud-builders/git
+- name: gcr.io/cloud-builders/git
   entrypoint: 'bash'
   args:
   - '-c'
