@@ -1,2 +1,2 @@
-const megs = 'Hello IX';
+const megs = 'Hello IX GCP';
 console.log(megs);
