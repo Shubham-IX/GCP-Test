@@ -38,7 +38,10 @@ steps:
     echo 'same package version'
     elif [[ $(cat /workspace/Latest_Version.txt) != $(cat /workspace/Previous_Version.txt) ]]
     then
-    
+    git add .
+    git commit -m "Package version is same"
+    git tag -a updated version
+    git push origin $BRANCH_NAME
     echo 'different package version'
     fi
     
