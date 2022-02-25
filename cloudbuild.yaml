@@ -4,7 +4,7 @@ steps:
   args:
   - '-c'
   - |
-     echo "Pushing changes to git config repo ..."
+    echo "Pushing changes to git config repo ..."
     git show-ref
     git config --global user.name ${_GIT_USERNAME}
     git config --global user.email ${_GIT_USEREMAIL}
@@ -37,13 +37,13 @@ steps:
   - |
     if [[ $(cat /workspace/Latest_Version.txt) == $(cat /workspace/Previous_Version.txt) ]]
     then
-      npm version patch
-      git add .
-      git commit -m "patch package version"
-      git push origin $BRANCH_NAME
+    npm version patch
+    git add .
+    git commit -m "patch package version"
+    git push origin $BRANCH_NAME
     elif [[ $(cat /workspace/Latest_Version.txt) != $(cat /workspace/Previous_Version.txt) ]]
     then
-      echo 'version is not updated'
+    echo 'version is not updated'
     fi
 
 - name: gcr.io/cloud-builders/git
