@@ -29,23 +29,23 @@ steps:
     echo 'Current Version is: ' $(cat /workspace/Latest_Version.txt)
     echo 'Previous Version is: ' $(cat /workspace/Previous_Version.txt)
 
-- name: gcr.io/cloud-builders/npm
-  entrypoint: 'bash'
-  args:
-  - '-c'
-  - |
-    echo 'npm start'   
-    if [[ $(cat /workspace/Latest_Version.txt) == $(cat /workspace/Previous_Version.txt) ]]
-    then
-    echo 'same package version'
-    npm version patch
-    git add .
-    git commit -m "patch package version is same"
-    git push origin $BRANCH_NAME
-    elif [[ $(cat /workspace/Latest_Version.txt) != $(cat /workspace/Previous_Version.txt) ]]
-    then
-    echo 'different package version'
-    fi
+# - name: gcr.io/cloud-builders/npm
+#   entrypoint: 'bash'
+#   args:
+#   - '-c'
+#   - |
+#     echo 'npm start'   
+#     if [[ $(cat /workspace/Latest_Version.txt) == $(cat /workspace/Previous_Version.txt) ]]
+#     then
+#     echo 'same package version'
+#     npm version patch
+#     git add .
+#     git commit -m "patch package version is same"
+#     git push origin $BRANCH_NAME
+#     elif [[ $(cat /workspace/Latest_Version.txt) != $(cat /workspace/Previous_Version.txt) ]]
+#     then
+#     echo 'different package version'
+#     fi
     
 
 
