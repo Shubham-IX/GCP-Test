@@ -39,3 +39,4 @@ steps:
     git push origin ${_MAIN_BRANCH}
     echo 'different package version'
     fi
+    echo 'pass'
