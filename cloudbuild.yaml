@@ -37,6 +37,7 @@ steps:
     echo 'npm start'   
     if [[ $(cat /workspace/Latest_Version.txt) == $(cat /workspace/Previous_Version.txt) ]]
     then
+    npm version patch
     echo 'same package version'
     elif [[ $(cat /workspace/Latest_Version.txt) != $(cat /workspace/Previous_Version.txt) ]]
     then
