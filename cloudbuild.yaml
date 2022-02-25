@@ -23,7 +23,6 @@ steps:
     echo 'npm start'   
     if [[ $(cat /workspace/Latest_Version.txt) == $(cat /workspace/Previous_Version.txt) ]]
     then
-    npm install
     npm version patch
     git add .
     git commit -m "Package version is same in master and development"
