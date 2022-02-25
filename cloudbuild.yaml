@@ -1,4 +1,3 @@
-
 steps:
 - name: gcr.io/cloud-builders/git
   entrypoint: 'bash'
@@ -7,50 +6,36 @@ steps:
   - |
     echo "Pushing changes to git config repository"
     git show-ref
-    git config --global user.name 'Shubham-IX'
-    git config --global user.email 'shubhamh@incubxperts.com'
-
+    git config --global user.name ${_GIT_USERNAME}
+    git config --global user.email ${_GIT_USEREMAIL}
+    
     echo $(cat package.json | grep version | head -1 | awk -F= "{ print $1 }" | sed 's/[version:,\",]//g' | tr -d '[[:space:]]') > /workspace/Latest_Version.txt
-
-    git branch -M master
-    git remote set-url origin https://github.com/Shubham-IX/GCP-Test.git
-
-    git checkout master
-    git fetch origin master
-    git reset --hard origin/master
-
+    git branch -M ${_MAIN_BRANCH}
+    git remote set-url origin ${_GIT_REPO}
+    git checkout ${_MAIN_BRANCH}
+    git fetch origin ${_MAIN_BRANCH}
+    git reset --hard origin/${_MAIN_BRANCH}
     echo $(cat package.json | grep version | head -1 | awk -F= "{ print $1 }" | sed 's/[version:,\",]//g' | tr -d '[[:space:]]') > /workspace/Previous_Version.txt
-
-    git branch -M development
-    git remote set-url origin https://github.com/Shubham-IX/GCP-Test.git
-    git checkout development
-    git fetch origin development
-    git reset --hard origin/development
-
-    echo 'Version is'
     echo 'Current Version is: ' $(cat /workspace/Latest_Version.txt)
     echo 'Previous Version is: ' $(cat /workspace/Previous_Version.txt)
-
-    echo development
-    git branch -M development
-    git remote set-url origin https://github.com/Shubham-IX/GCP-Test.git
-    git tag v$(cat /workspace/Latest_Version.txt)
-    git push origin development --tags -f
-
-# - name: 'gcr.io/cloud-builders/npm'
-#   entrypoint: 'bash'
-#   args:
-#   - '-c'
-#   - |
-#     if [[ $(cat /workspace/Latest_Version.txt) == $(cat /workspace/Previous_Version.txt) ]]
-#     then
-#       npm version patch
-#       git add .
-#       git commit -m "patch package version is same"
-#       git push origin development
-#     elseif [[ $(cat /workspace/Latest_Version.txt) != $(cat /workspace/Previous_Version.txt) ]]
-#     then
-#       echo 'Package version is not same'
-#     fi
-
-
+- name: gcr.io/cloud-builders/npm
+  entrypoint: 'bash'
+  args:
+  - '-c'
+  - |
+    echo 'npm start'   
+    if [[ $(cat /workspace/Latest_Version.txt) == $(cat /workspace/Previous_Version.txt) ]]
+    then
+    npm version patch
+    git add .
+    git commit -m "Package version is same"
+    git push origin ${_MAIN_BRANCH}
+    echo 'same package version'
+    elif [[ $(cat /workspace/Latest_Version.txt) != $(cat /workspace/Previous_Version.txt) ]]
+    then
+    git add .
+    git commit -m "Package version is different craeating tag"
+    git tag $(cat /workspace/Latest_Version.txt)
+    git push origin ${_MAIN_BRANCH}
+    echo 'different package version'
+    fi
