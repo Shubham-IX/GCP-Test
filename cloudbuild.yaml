@@ -56,5 +56,4 @@ steps:
 #     echo ${_GIT_REPO}
 #     git remote set-url origin ${_GIT_REPO}
 #     git tag -a updated version
-
 #     git push origin $BRANCH_NAME
