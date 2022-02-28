@@ -21,7 +21,7 @@ steps:
   - '-c'
   - |
     git remote set-url origin ${_GIT_REPO}
-    echo $BRANCH_NAME
+    git branch -M $BRANCH_NAME
     git tag v$(cat /workspace/Latest_Version.txt)
     git push origin $BRANCH_NAME --tags -f
 
