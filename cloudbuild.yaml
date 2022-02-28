@@ -38,7 +38,9 @@ steps:
   - |
     if [[ $(cat /workspace/Latest_Version.txt) == $(cat /workspace/Previous_Version.txt) ]]
     then
-    echo 'nedd to patch'
+    echo 'need to patch'
+    npm version patch
+    echo 'version patched'
     elif [[ $(cat /workspace/Latest_Version.txt) != $(cat /workspace/Previous_Version.txt) ]]
     then
     echo 'version is updated by development team'
