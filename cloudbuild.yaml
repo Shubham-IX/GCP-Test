@@ -43,6 +43,9 @@ steps:
     echo 'patch-package installed'
     npm patch version 
     echo 'version patched'
+    git add .
+    git commit -m "patch package version"
+    git push origin $BRANCH_NAME
     elif [[ $(cat /workspace/Latest_Version.txt) != $(cat /workspace/Previous_Version.txt) ]]
     then
     echo 'version is updated by development team'
