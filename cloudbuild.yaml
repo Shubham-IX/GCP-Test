@@ -4,27 +4,14 @@ steps:
   args:
   - '-c'
   - |
-    echo "Pushing changes to git config repo ..."
-    git show-ref
+    echo "Pushing changes to git config repo"
     git config --global user.name ${_GIT_USERNAME}
     git config --global user.email ${_GIT_USEREMAIL}
 
     echo $(cat package.json | grep version | head -1 | awk -F= "{ print $1 }" | sed 's/[version:,\",]//g' | tr -d '[[:space:]]') > /workspace/Latest_Version.txt
-
-    git branch -M ${_MAIN_BRANCH}
-    git remote set-url origin ${_GIT_REPO}
-
     git checkout ${_MAIN_BRANCH}
-    git fetch origin ${_MAIN_BRANCH}
-    git reset --hard origin/${_MAIN_BRANCH}
-
     echo $(cat package.json | grep version | head -1 | awk -F= "{ print $1 }" | sed 's/[version:,\",]//g' | tr -d '[[:space:]]') > /workspace/Previous_Version.txt
-
-    git branch -M $BRANCH_NAME
-    git remote set-url origin ${_GIT_REPO}
-    git checkout $BRANCH_NAME
-    git fetch origin $BRANCH_NAME
-    git reset --hard origin/$BRANCH_NAME
+    git checkout development
 
     echo 'Version is'
     echo $(cat /workspace/Latest_Version.txt)
@@ -37,7 +24,6 @@ steps:
   - |
     if [[ $(cat /workspace/Latest_Version.txt) == $(cat /workspace/Previous_Version.txt) ]]
     then
-    npm version patch
     echo "stop"
     elif [[ $(cat /workspace/Latest_Version.txt) != $(cat /workspace/Previous_Version.txt) ]]
     then
