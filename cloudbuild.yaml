@@ -41,6 +41,8 @@ steps:
     echo 'need to patch'
     npm i patch-package
     echo 'patch-package installed'
+    npm patch version 
+    echo 'version patched'
     elif [[ $(cat /workspace/Latest_Version.txt) != $(cat /workspace/Previous_Version.txt) ]]
     then
     echo 'version is updated by development team'
