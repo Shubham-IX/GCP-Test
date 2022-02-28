@@ -23,8 +23,7 @@ steps:
   args:
   - '-c'
   - |
-    git config --global user.name ${_GIT_USERNAME}
-    git config --global user.email ${_GIT_USEREMAIL}
+    git remote set-url origin ${_GIT_REPO}
     echo $BRANCH_NAME
     git tag v$(cat /workspace/Latest_Version.txt)
     git push origin $BRANCH_NAME --tags -f
