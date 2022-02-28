@@ -1,1 +1,34 @@
+steps:
+- name: gcr.io/cloud-builders/git
+  entrypoint: 'bash'
+  args:
+  - '-c'
+  - |
+    echo "Pushing changes to git config repo"
+    git config --global user.name ${_GIT_USERNAME}
+    git config --global user.email ${_GIT_USEREMAIL}
+
+    echo $(cat package.json | grep version | head -1 | awk -F= "{ print $1 }" | sed 's/[version:,\",]//g' | tr -d '[[:space:]]') > /workspace/Latest_Version.txt
+    git checkout ${_MAIN_BRANCH}
+    echo $(cat package.json | grep version | head -1 | awk -F= "{ print $1 }" | sed 's/[version:,\",]//g' | tr -d '[[:space:]]') > /workspace/Previous_Version.txt
+    git checkout ${_BRANCH_NAME}
+
+    echo 'Version is'
+    echo $(cat /workspace/Latest_Version.txt)
+    echo $(cat /workspace/Previous_Version.txt)
+
+- name: 'gcr.io/cloud-builders/npm'
+  entrypoint: 'bash'
+  args:
+  - '-c'
+  - |
+    if [[ $(cat /workspace/Latest_Version.txt) == $(cat /workspace/Previous_Version.txt) ]]
+    then
+    echo "stop"
+    elif [[ $(cat /workspace/Latest_Version.txt) != $(cat /workspace/Previous_Version.txt) ]]
+    then
+    echo 'version is not updated'
+    git tag v$(cat /workspace/Latest_Version.txt)
+    git push origin $BRANCH_NAME --tags -f
+    fi
 
