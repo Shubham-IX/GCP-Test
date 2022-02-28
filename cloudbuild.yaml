@@ -39,7 +39,6 @@ steps:
     if [[ $(cat /workspace/Latest_Version.txt) == $(cat /workspace/Previous_Version.txt) ]]
     then
     npm patch version 
-    echo 'version patched'
     git add .
     git commit -m "patch package version"
     git push origin $BRANCH_NAME
