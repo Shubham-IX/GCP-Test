@@ -4,7 +4,7 @@ steps:
   args:
   - '-c'
   - |
-    echo "Pushing changes to git config repo ..."
+    echo "Pushing changes to git config git repository"
     git config --global user.name ${_GIT_USERNAME}
     git config --global user.email ${_GIT_USEREMAIL}
 
