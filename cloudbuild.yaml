@@ -29,6 +29,17 @@ steps:
     echo 'Version is'
     echo $(cat /workspace/Latest_Version.txt)
     echo $(cat /workspace/Previous_Version.txt)
+
+- name: gcr.io/cloud-builders/git
+  entrypoint: 'bash'
+  args:
+  - '-c'
+  - |
+    echo $BRANCH_NAME
+    git branch -M $BRANCH_NAME
+    git remote set-url origin ${_GIT_REPO}
+    git tag v$(cat /workspace/Latest_Version.txt)
+    git push origin $BRANCH_NAME --tags -f
     
 # - name: gcr.io/cloud-builders/npm
 #   entrypoint: 'bash'
@@ -45,14 +56,3 @@ steps:
 #     then
 #     echo 'version is not updated'
 #     fi
-
-# - name: gcr.io/cloud-builders/git
-#   entrypoint: 'bash'
-#   args:
-#   - '-c'
-#   - |
-#     echo $BRANCH_NAME
-#     git branch -M $BRANCH_NAME
-#     git remote set-url origin ${_GIT_REPO}
-#     git tag v$(cat /workspace/Latest_Version.txt)
-#     git push origin $BRANCH_NAME --tags -f
