@@ -32,7 +32,7 @@ steps:
 
     
 - name: gcr.io/cloud-builders/npm
-  entrypoint: 'bash'
+  entrypoint: 'npm'
   args:
   - '-c'
   - |
