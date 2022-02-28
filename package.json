@@ -10,8 +10,5 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Shubham-IX/GCP-Test"
-  },
-  "dependencies": {
-    "patch-package": "^6.4.7"
   }
 }
