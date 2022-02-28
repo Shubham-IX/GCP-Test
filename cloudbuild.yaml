@@ -32,15 +32,15 @@ steps:
 
     
 - name: gcr.io/cloud-builders/npm
-  entrypoint: 'npm'
+  entrypoint: 'bash'
   args:
   - '-c'
   - |
     if [[ $(cat /workspace/Latest_Version.txt) == $(cat /workspace/Previous_Version.txt) ]]
     then
     echo 'need to patch'
-    npm version patch -m 'In progress'
-    echo 'version patched'
+    npm i patch-package
+    echo 'patch-package installed'
     elif [[ $(cat /workspace/Latest_Version.txt) != $(cat /workspace/Previous_Version.txt) ]]
     then
     echo 'version is updated by development team'
