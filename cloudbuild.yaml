@@ -13,7 +13,7 @@ steps:
     echo 'Version is'
     echo $(cat /workspace/Latest_Version.txt)
     echo $(cat /workspace/Previous_Version.txt)
-    
+
 - name: 'gcr.io/cloud-builders/npm'
   entrypoint: 'bash'
   args:
@@ -21,7 +21,7 @@ steps:
   - |
     if [[ $(cat /workspace/Latest_Version.txt) == $(cat /workspace/Previous_Version.txt) ]]
     then
-    echo "stop"
+    npm patch version
     elif [[ $(cat /workspace/Latest_Version.txt) != $(cat /workspace/Previous_Version.txt) ]]
     then
     echo 'version is not updated'
